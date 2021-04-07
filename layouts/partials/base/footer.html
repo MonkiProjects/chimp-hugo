@@ -1,0 +1,54 @@
+<footer class="bg-gray-100 dark:bg-gray-800">
+  <div class="max-w-7xl mx-auto p-4 lg:p-8">
+    <div class="lg:flex underline-hovered-links">
+      <div class="lg:w-1/4 mb-6 lg:mb-0 lg:mr-6">
+        <a href="{{site.BaseURL|relLangURL}}" class="mb-4 block">
+          {{- if site.Params.logo }}
+          {{ partial "dynamic-img.html" (merge .Site.Params.logo.horizontal.colored (dict "classes" "h-16" "alt" (i18n "site_logo"))) }}
+          {{- else }}
+          <span class="text-4xl font-bold">{{ site.Title }}</span>
+          {{- end }}
+        </a>
+      </div>
+      <ul class="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {{- range site.Menus.footer }}
+        <li class="mb-5">
+          {{- if .URL }}
+          <a class="block text-2xl font-bold text-gray-500 mb-1 {{.Params.class}}" href="{{.URL|absLangURL}}">
+            {{ .Pre }}<span>{{ .Name }}</span>{{ .Post }}
+          </a>
+          {{- else }}
+          <span class="block text-2xl font-bold text-gray-500 mb-1 {{.Params.class}}">
+            {{ .Pre }}<span>{{ .Name }}</span>{{ .Post }}
+          </span>
+          {{- end }}
+          {{- if .HasChildren }}
+          <ul>
+            {{- range .Children }}
+            <li>
+              {{- if .URL }}
+              <a class="text-lg {{.Params.class}}" href="{{.URL|absLangURL}}">
+                {{ .Pre }}<span>{{ .Name }}</span>{{ .Post }}
+              </a>
+              {{- else }}
+              <span class="text-lg {{.Params.class}}">
+                {{ .Pre }}<span>{{ .Name }}</span>{{ .Post }}
+              </span>
+              {{- end }}
+            </li>
+            {{- end }}
+          </ul>
+          {{- end }}
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+    <div class="my-4 sm:text-center colored-links text-muted tracking-widest">
+      <small>{{ site.Params.copyright | markdownify }}</small>
+    </div>
+  </div>
+</footer>
+{{ "<!-- JS Plugins -->" | safeHTML }}
+{{ range site.Params.plugins.js }}<script src="{{ .link | absURL }}"></script>{{ end }}
+{{ "<!-- Main Script -->" | safeHTML }}{{ $script := resources.Get "js/script.js" }}
+<script src="{{ $script.Permalink }}"></script>

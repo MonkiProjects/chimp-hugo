@@ -1,0 +1,32 @@
+{{ define "main" }}
+<main class="max-w-7xl mx-auto p-4 my-4 sm:my-8 md:my-12 lg:my-16 xl:my-20">
+  <div itemtype="http://schema.org/Person" itemscope class="md:flex colored-links">
+    <img class="rounded-xl w-48 h-48 md:sticky md:top-24 mb-6 md:mb-0 md:mr-6" src="{{.Params.profile.profile_picture|absURL}}">
+    <div>
+      <h1 itemprop="name" class="text-4xl">{{ with .Params.profile.display_name }}{{ . }}{{ else }}{{ .Title }}{{ end }}</h1>
+      {{- with .Params.profile.job_title }}
+      <h2 itemprop="jobTitle" class="text-2xl">{{ . }}</h2>
+      {{- end }}
+      <p itemprop="description" class="text-xl my-3">{{ .Summary | markdownify }}</p>
+      {{- with .Params.profile }}
+        {{- partial "socials" . }}
+      {{- end }}
+      <div itemprop="worksFor" hidden>
+        {{- partial "seo/schemas/monki-projects.html" . }}
+      </div>
+    </div>
+  </div>
+  {{- $posts := where (where .Site.RegularPages "Type" "blog") ".Params.author" "==" .File.BaseFileName }}
+  {{- if $posts }}
+  <h3 class="text-4xl mt-12 mb-6 sm:text-center">{{ i18n "latest_posts" }}</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <!-- TODO: Add empty state message for when someone hasn't written anything yet -->
+    {{- range $index, $page := $posts }}
+      {{- $page.Scratch.Set "large" (eq $index 0) }}
+      {{- $page.Scratch.Set "no_author" true }}
+      {{ partial "blog/article-card.html" $page }}
+    {{- end }}
+  </div>
+  {{- end }}
+</main>
+{{ end }}

@@ -1,0 +1,56 @@
+<!--
+  BUG: `.Scratch.Get "large"` is set on an articl's page.
+  With multiple authors on the website, it will lead to layout errors.
+  The last article of every author will be large on the blog posts list
+  (or not if the blog posts list is generated first).
+-->
+<article class="flex flex-col border-b border-gray-300 dark:border-gray-600{{if .Scratch.Get "large"}} md:col-span-2{{end}}">
+  <a class="rounded-lg shadow-md hover:shadow-lg overflow-hidden" href="{{.Permalink}}">
+    {{ partial "cover.html" . }}
+  </a>
+  <div class="p-2 flex-grow">
+    <h4 class="mb-2"><a class="text-2xl font-bold hover:text-primary-500" href="{{.Permalink}}">{{ .Title | markdownify }}</a></h4>
+    <p class="my-2">{{ .Summary | markdownify }}</p>
+
+    <!-- Date & Length -->
+    <div class="text-muted my-2">
+      <time datetime="{{.Date.Format "2006-01-02T15:04:05Z"}}">
+        <span>
+          {{ (dateFormat (i18n "date_format") .Date.Local) }}
+           · 
+          {{ i18n "reading_time" .ReadingTime }}
+        </span>
+      </time>
+      {{- if not hugo.IsProduction }}
+      <span> · {{ i18n "word_count" . }}</span>
+      {{- end }}
+    </div>
+
+    {{ "<!-- Author -->" | safeHTML }}
+    {{- with .Params.author }}
+      {{- $author := . }}
+    <div class="my-2 underline-hovered-links flex align-center" itemtype="http://schema.org/Person" itemscope itemprop="author">
+      {{- with $.Site.GetPage "/authors" . }}
+        {{- $authorPage := . }}
+        {{- with .Params.profile.profile_picture }}
+      <img class="h-12 w-12 object-cover rounded-full mr-3 border border-gray-300 dark:border-gray-600" src="{{.|absURL}}" />
+        {{- end }}
+        {{- with .Params.profile }}
+      <div>
+        <a class="author" href="{{(relLangURL $authorPage.RelPermalink)}}" rel="author" itemprop="url">
+          <span class="text-lg" itemprop="name">{{ .display_name }}</span>
+        </a>
+          {{- with .job_title }}
+        <span class="block text-muted -mt-1" itemprop="jobTitle">{{ . }}</span>
+          {{- end }}
+      </div>
+        {{- else }}
+      <span itemprop="name">{{ $author }}</span>
+        {{- end }}
+      {{- else }}
+      <span itemprop="name">{{ . }}</span>
+      {{- end }}
+    </div>
+    {{- end }}
+  </div>
+</article>

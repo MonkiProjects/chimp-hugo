@@ -1,0 +1,12 @@
+name = "Chimp"
+license = "MIT"
+licenselink = "https://github.com/MonkiProjects/chimp-hugo/blob/main/LICENSE"
+description = "Hugo theme used on Monki Projects' website."
+homepage = "https://monkiprojects.com"
+tags = ["apps", "tailwind"]
+features = ["blog", "authors", "dark-mode"]
+min_version = "0.41.0"
+
+[author]
+  name = "Monki Projects"
+  homepage = "https://monkiprojects.com"

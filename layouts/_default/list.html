@@ -1,0 +1,12 @@
+{{ define "main" }}
+<section class="py-5 text-sm-center">
+  <div class="container py-lg-5">
+    <div class="row">
+      <div class="col-12 text-center mb-5">
+        <h1>{{ .Title }}</h1>
+      </div>
+    </div>
+    {{ .Content | markdownify }}
+  </div>
+</section>
+{{ end }}

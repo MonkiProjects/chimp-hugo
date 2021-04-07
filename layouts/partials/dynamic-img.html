@@ -1,0 +1,6 @@
+{{- with .on_light }}
+<img class="block{{if $.on_dark}} dark:hidden{{end}} {{$.classes}}" src="{{.|absURL}}"{{with $.alt}} alt="{{.}}"{{end}}>
+{{- end }}
+{{- with .on_dark }}
+<img class="{{if $.on_light}}hidden {{end}} dark:block {{$.classes}}" src="{{.|absURL}}"{{with $.alt}} alt="{{.}}"{{end}}>
+{{- end }}

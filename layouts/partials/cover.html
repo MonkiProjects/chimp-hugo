@@ -1,0 +1,13 @@
+{{- with .Params.cover }}
+  {{- $cover := . }}
+  {{- with .light }}
+<img class="block{{if $cover.dark}} dark:hidden{{end}}" src="{{.|absURL}}">
+  {{- end }}
+  {{- with .dark }}
+<img class="{{if $cover.light}}hidden {{end}} dark:block" src="{{.|absURL}}">
+  {{- end }}
+{{- else }}
+  {{- with (index (.Params.images) 0) }}
+<img src="{{.|absURL}}">
+  {{- end }}
+{{- end }}

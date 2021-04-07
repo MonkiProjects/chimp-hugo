@@ -1,0 +1,39 @@
+{{ define "main" }}
+
+  {{- with .Params.hero }}
+    {{- if .enable }}
+      {{- partial "homepage/hero.html" . }}
+    {{- end }}
+  {{- end }}
+
+  {{- with .Params.features }}
+    {{- if .enable }}
+      {{- partial "feature-grid.html" . }}
+    {{- end }}
+  {{- end }}
+
+  {{- with .Params.promo }}
+    {{- if .enable }}
+      {{- partial "promo.html" . }}
+    {{- end }}
+  {{- end }}
+
+  {{- with .Params.about_apps }}
+    {{- if .enable }}
+      {{- partial "homepage/about-apps.html" . }}
+    {{- end }}
+  {{- end }}
+
+  {{- with .Params.subscription }}
+    {{- if .enable }}
+      {{- partial "subscription.html" . }}
+    {{- end }}
+  {{- end }}
+
+  {{- with .Params.testimonials }}
+    {{- if .enable }}
+      {{- partial "homepage/testimonials.html" . }}
+    {{- end }}
+  {{- end }}
+
+{{ end }}

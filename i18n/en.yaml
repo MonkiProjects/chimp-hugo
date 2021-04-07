@@ -1,0 +1,19 @@
+written_by: "Written by"
+
+on_date: "on {{ . }}"
+updated_on: "updated on {{ . }}"
+
+reading_time:
+  one: "{{ .Count }} minute to read"
+  other: "{{ .Count }} minutes to read"
+
+word_count:
+  one: "{{ .WordCount }} word"
+  other: "{{ .WordCount }} words"
+
+date_format: "Jan 2, 2006"
+date_time_format: "Jan 2, 2006, 09:04"
+
+latest_posts: "Latest posts"
+
+site_logo: "Website logo"

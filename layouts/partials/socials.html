@@ -1,0 +1,38 @@
+<ul>
+  {{- with .mobile }}
+  <li>
+    <i class="fas fa-phone w-4 mr-2 text-center"></i>
+    <a itemprop="telephone" href="tel:{{.}}">{{ . }}</a>
+  </li>
+  {{- end }}
+  {{- with .email }}
+  <li>
+    <i class="fas fa-envelope w-4 mr-2 text-center"></i>
+    <a itemprop="email" href="mailto:{{.}}">{{ . }}</a>
+  </li>
+  {{- end }}
+  {{- with .instagram }}
+  <li>
+    <i class="fab fa-instagram w-4 mr-2 text-center"></i>
+    <a href="https://www.instagram.com/{{.}}">@{{ . }}</a>
+  </li>
+  {{- end }}
+  {{- with .linkedin_company }}
+  <li>
+    <i class="fab fa-linkedin w-4 mr-2 text-center"></i>
+    <a href="https://www.linkedin.com/company/{{.}}">{{ . }}</a>
+  </li>
+  {{- end }}
+  {{- with .linkedin }}
+  <li>
+    <i class="fab fa-linkedin w-4 mr-2 text-center"></i>
+    <a href="https://www.linkedin.com/in/{{.}}">{{ . }}</a>
+  </li>
+  {{- end }}
+  {{- with .location }}
+  <li itemprop="workLocation" itemscope="" itemtype="https://schema.org/Place">
+    <i class="fas fa-map-marker-alt w-4 mr-2 text-center"></i>
+    <span itemprop="address">{{ . }}</span>
+  </li>
+  {{- end }}
+</ul>

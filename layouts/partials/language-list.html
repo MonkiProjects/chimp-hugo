@@ -1,0 +1,17 @@
+{{ "<!-- Language List -->" | safeHTML }}
+{{- if .IsTranslated }}
+<select class="cursor-pointer appearance-none shadow my-2 px-2 dark:bg-gray-700 dark:text-white" id="select-language" onchange="location = this.value;">
+  {{- $siteLanguages := .Site.Languages}}
+  {{- $pageLang := .Page.Lang}}
+  {{- range .Page.AllTranslations }}
+    {{- $translation := .}}
+    {{- range $siteLanguages }}
+      {{- if eq $translation.Lang .Lang }}
+  <option id="{{ $translation.Language }}" value="{{ $translation.Permalink }}"{{ if eq $pageLang .Lang }} selected{{ end }}>
+    {{ .LanguageName }}
+  </option>
+      {{- end }}
+    {{- end }}
+  {{- end }}
+</select>
+{{ end }}

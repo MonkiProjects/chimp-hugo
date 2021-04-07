@@ -1,0 +1,35 @@
+
+{{- with .Site.GetPage "/authors" .Params.author }}
+  {{- $authorPage := . }}
+  {{- with .Params.profile }}
+<div itemtype="http://schema.org/Person" itemscope itemprop="author">
+  {{- i18n "written_by" }} 
+  <a href="{{ (relLangURL $authorPage.RelPermalink) }}" class="author" rel="author" itemprop="url">
+    <span itemprop="name">{{ .display_name }}</span>
+  </a>
+  <time datetime="{{ $.Date.Format "2006-01-02T15:04:05Z" }}">
+  {{- i18n "on_date" (dateFormat (i18n "date_time_format") $.Date.Local) }}
+  {{- if ne $.Lastmod $.Date }}
+  <span class="text-muted">({{- i18n "updated_on" (dateFormat (i18n "date_time_format") $.Lastmod.Local) }})</span>
+  {{- end }}
+    · 
+  {{ i18n "reading_time" $.ReadingTime -}}
+  {{- if not hugo.IsProduction }}
+  <span class="text-muted"> · {{ i18n "word_count" $ }}</span>
+  {{- end }}
+</div>
+  {{- end }}
+{{- else }}
+  {{- with .Params.author }}
+<div itemtype="http://schema.org/Person" itemscope itemprop="author">
+  <span itemprop="name">{{ . }}</span>
+</div>
+  {{- end }}
+{{- end }}
+<!-- <div class="byline mb-3">
+  By <b>{{ .Params.author }}</b> · <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z" }}">
+  {{- .Date.Format "January 2, 2006" -}}
+  </time>{{- if in (.Site.BaseURL | string) "localhost" -}}
+  <span class="text-muted">· {{ i18n "word_count" . }}</span>
+  {{- end -}}
+</div> -->

@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="{{with site.LanguageCode}}{{.}}{{else}}en-US{{end}}">
+{{- partial "base/head.html" . }}
+<body id="body" class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+  {{- partial "base/header.html" . }}
+  {{- block "main" . }}{{ end }}
+  {{- partial "base/footer.html" . }}
+</body>
+</html>

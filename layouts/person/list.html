@@ -1,0 +1,21 @@
+{{ define "main" }}
+<main class="max-w-7xl mx-auto p-4 my-4 sm:my-8 md:my-12 lg:my-16 xl:my-20">
+  <h1 class="text-4xl mb-6 sm:text-center">{{ .Title }}</h1>
+  <div class="flex flex-wrap justify-center -m-3">
+    {{- range .Data.Pages }}
+    <article class="bg-white dark:bg-gray-800 shadow-md max-w-md rounded-lg m-3">
+      <a class="flex flex-row items-center p-4 space-x-4 hover:text-primary-500" href="{{.Permalink}}">
+        <img class="w-32 h-32 rounded" src="{{.Params.profile.profile_picture|absURL}}" alt="Profile picture" style="object-fit: cover;">
+        <div>
+          <h2 class="text-lg">{{ with .Params.profile.display_name }}{{ . }}{{ else }}{{ .Title }}{{ end }}</h2>
+          {{- with .Params.profile.job_title }}
+          <span class="block">{{ . }}</span>
+          {{- end }}
+          <span class="block text-muted">{{ .Summary }}</span>
+        </div>
+      </a>
+    </article>
+    {{- end }}
+  </div>
+</main>
+{{ end }}
