@@ -2,8 +2,6 @@
 // - <https://dev.to/divrhino/how-to-add-tailwindcss-to-your-hugo-site-5290>
 // - <https://github.com/dirkolbrich/hugo-theme-tailwindcss-starter>
 
-const themeDir = __dirname + '/../../';
-
 const purgecss = require('@fullhuman/postcss-purgecss')({
   // See https://gohugo.io/hugo-pipes/postprocess/#css-purging-with-postcss
   content: ['./hugo_stats.json'],
@@ -11,18 +9,15 @@ const purgecss = require('@fullhuman/postcss-purgecss')({
     let els = JSON.parse(content).htmlElements;
     return els.tags.concat(els.classes, els.ids);
   }
-})
+});
 
 module.exports = {
   plugins: [
     require('postcss-import')({
-      path: [themeDir]
+      path: [__dirname]
     }),
-    require('tailwindcss')(themeDir + 'assets/scss/tailwind.config.js'),
-    require('autoprefixer')({
-      path: [themeDir],
-      grid: true
-    }),
+    require('tailwindcss')(__dirname + '/tailwind.config.js'),
+    require('autoprefixer'),
     ...(process.env.HUGO_ENVIRONMENT === 'production' ? [purgecss] : [])
   ]
-}
+};

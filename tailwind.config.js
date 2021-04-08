@@ -1,11 +1,7 @@
-const colors = require('tailwindcss/colors')
-const defaultTheme = require('tailwindcss/defaultTheme')
+const colors = require('tailwindcss/colors');
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  purge: [
-    './src/**/*.html',
-    './src/**/*.js',
-  ],
   darkMode: 'media', // false | 'media' | 'class'
   theme: {
     extend: {},
@@ -30,4 +26,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-}
+};

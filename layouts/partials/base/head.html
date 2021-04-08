@@ -22,17 +22,19 @@
   {{- end }}
 
   {{ "<!-- Main Stylesheet -->" | safeHTML }}
-  {{- $styles := resources.Get "scss/style.scss" | toCSS | postCSS (dict "config" "./assets/scss/postcss.config.js") }}
+  <!-- See <https://gohugo.io/hugo-pipes/postprocess/#css-purging-with-postcss> -->
+  {{- $css := resources.Get "scss/style.scss" | toCSS }}
+  {{- $style := $css | postCSS }}
   {{- if hugo.IsProduction }}
-    {{- $styles := $styles | minify | fingerprint | resources.PostProcess }}
-  <link rel="stylesheet" href="{{$styles.Permalink}}" integrity="{{$styles.Data.Integrity}}">
+    {{- $style := $style | minify | fingerprint | resources.PostProcess }}
+  <link rel="stylesheet" href="{{$style.Permalink}}" integrity="{{$style.Data.Integrity}}">
   {{- else }}
-  <link rel="stylesheet" href="{{$styles.RelPermalink}}">
+  <link rel="stylesheet" href="{{$style.RelPermalink}}">
   {{- end }}
 
-  {{ "<!-- Plugins -->" | safeHTML }}
+  {{ "<!-- CSS Plugins -->" | safeHTML }}
   {{- range site.Params.plugins.css }}
-  <link rel="stylesheet" href="{{.link|absURL}} ">
+  <link rel="stylesheet" href="{{.link|absURL}}">
   {{- end }}
 
   {{ "<!-- Favicon -->" | safeHTML }}
