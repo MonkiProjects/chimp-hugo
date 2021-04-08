@@ -1,0 +1,12 @@
+@media (prefers-color-scheme: dark) {
+  .dark\:block {
+    display: block !important;
+  }
+  .dark\:hidden {
+    display: none !important;
+  }
+}
+
+.text-muted {
+  @apply text-gray-500 dark:text-gray-400;
+}

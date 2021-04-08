@@ -1,0 +1,14 @@
+a {
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  -moz-transition: all 0.2s ease-in-out 0s;
+  -o-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
+}
+
+.colored-links a {
+  @apply text-primary-500 dark:text-primary-400 hover:underline;
+}
+
+.underlined-hovered-links a:hover {
+  @apply underline;
+}

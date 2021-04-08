@@ -24,7 +24,7 @@
     {{ "<!-- Author -->" | safeHTML }}
     {{- if not $.no_author }}{{ with .Params.author }}
       {{- $author := . }}
-    <div class="my-2 underline-hovered-links flex align-center" itemtype="http://schema.org/Person" itemscope itemprop="author">
+    <div class="my-2 underlined-hovered-links flex align-center" itemtype="http://schema.org/Person" itemscope itemprop="author">
       {{- with $.article.Site.GetPage "/authors" . }}
         {{- $authorPage := . }}
         {{- with .Params.profile.profile_picture }}
