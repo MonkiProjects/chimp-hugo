@@ -3,8 +3,8 @@
   <h1 class="text-4xl mb-6 sm:text-center">{{ .Title }}</h1>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
     {{- range $index, $page := where .Site.RegularPages "Type" "blog" }}
-    {{- $page.Scratch.Set "large" (eq $index 0) }}
-    {{ partial "blog/article-card.html" $page }}
+      {{- $large := (eq $index 0) }}
+      {{ partialCached "blog/article-card.html" (dict "article" $page "large" $large) $large }}
     {{- end }}
   </div>
 </main>

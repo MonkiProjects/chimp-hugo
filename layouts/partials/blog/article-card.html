@@ -1,10 +1,5 @@
-<!--
-  BUG: `.Scratch.Get "large"` is set on an articl's page.
-  With multiple authors on the website, it will lead to layout errors.
-  The last article of every author will be large on the blog posts list
-  (or not if the blog posts list is generated first).
--->
-<article class="flex flex-col border-b border-gray-300 dark:border-gray-600{{if .Scratch.Get "large"}} md:col-span-2{{end}}">
+{{- with .article }}
+<article class="flex flex-col border-b border-gray-300 dark:border-gray-600{{if $.large}} md:col-span-2{{end}}">
   <a class="rounded-lg shadow-md hover:shadow-lg overflow-hidden" href="{{.Permalink}}">
     {{ partial "cover.html" . }}
   </a>
@@ -27,10 +22,10 @@
     </div>
 
     {{ "<!-- Author -->" | safeHTML }}
-    {{- with .Params.author }}
+    {{- if not $.no_author }}{{ with .Params.author }}
       {{- $author := . }}
     <div class="my-2 underline-hovered-links flex align-center" itemtype="http://schema.org/Person" itemscope itemprop="author">
-      {{- with $.Site.GetPage "/authors" . }}
+      {{- with $.article.Site.GetPage "/authors" . }}
         {{- $authorPage := . }}
         {{- with .Params.profile.profile_picture }}
       <img class="h-12 w-12 object-cover rounded-full mr-3 border border-gray-300 dark:border-gray-600" src="{{.|absURL}}" />
@@ -51,6 +46,7 @@
       <span itemprop="name">{{ . }}</span>
       {{- end }}
     </div>
-    {{- end }}
+    {{- end }}{{ end }}
   </div>
 </article>
+{{- end }}

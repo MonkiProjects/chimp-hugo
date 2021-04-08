@@ -22,9 +22,9 @@
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
     <!-- TODO: Add empty state message for when someone hasn't written anything yet -->
     {{- range $index, $page := $posts }}
-      {{- $page.Scratch.Set "large" (eq $index 0) }}
-      {{- $page.Scratch.Set "no_author" true }}
-      {{ partial "blog/article-card.html" $page }}
+      {{- $large := (eq $index 0) }}
+      {{- $no_author := true }}
+      {{ partialCached "blog/article-card.html" (dict "article" $page "large" $large "no_author" $no_author) $large $no_author }}
     {{- end }}
   </div>
   {{- end }}
