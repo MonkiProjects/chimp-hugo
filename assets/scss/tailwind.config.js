@@ -8,14 +8,7 @@ module.exports = {
   ],
   darkMode: 'media', // false | 'media' | 'class'
   theme: {
-    extend: {
-      fontFamily: {
-        sans: [
-          'Nunito',
-          ...defaultTheme.fontFamily.sans,
-        ]
-      }
-    },
+    extend: {},
     colors: {
       ...colors,
       primary: colors.orange,
@@ -26,10 +19,11 @@ module.exports = {
       yellow: colors.amber
     },
     fontFamily: {
-      'sans': 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-      'serif': 'ui-serif, Georgia, Cambria, "Times New Roman", Times, serif',
-      'mono': 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-      'rounded': 'Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+      ...defaultTheme.fontFamily,
+      'rounded': [
+        'Nunito',
+        ...defaultTheme.fontFamily.sans,
+      ],
     },
   },
   variants: {

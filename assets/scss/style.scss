@@ -17,3 +17,9 @@
 @import 'markdown-content';
 @import 'blog-posts';
 @import 'apps';
+
+/* ========== Other CSS ========== */
+
+body {
+  @apply text-rounded;
+}
