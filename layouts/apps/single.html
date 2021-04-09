@@ -15,7 +15,7 @@
   {{- range . }}
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
     <div class="w-72 md:w-auto md:col-start-1 md:sticky top-32 left-0 right-0 mx-auto mb-auto">
-      {{ partial "image-frames/iphone.html" (dict "url" .image) }}
+      {{ partialCached "image-frames/iphone.html" (dict "url" .image) .image }}
     </div>
     <div class="app-details-content col-span-1 md:col-span-2 md:col-span-2 my-auto md:py-32">
       {{ .content | markdownify }}

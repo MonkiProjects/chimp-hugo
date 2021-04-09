@@ -1,6 +1,6 @@
 <a class="block text-center mx-auto my-4 w-80 hover:text-primary-500" href="{{.Permalink}}">
   {{- with (index (.Params.images) 0) }}
-  {{- partial "image-frames/iphone.html" (dict "url" .) }}
+  {{- partialCached "image-frames/iphone.html" (dict "url" .) . }}
   {{- end }}
   <h4 class="text-3xl font-bold">{{ .Title }}</h4>
 </a>

@@ -1,7 +1,7 @@
 {{- with .article }}
 <article class="flex flex-col border-b border-gray-300 dark:border-gray-600{{if $.large}} md:col-span-2{{end}}">
   <a class="rounded-lg shadow-md hover:shadow-lg overflow-hidden" href="{{.Permalink}}">
-    {{ partial "cover.html" . }}
+    {{ partialCached "cover.html" . .Permalink }}
   </a>
   <div class="p-2 flex-grow">
     <h4 class="mb-2"><a class="text-2xl font-bold hover:text-primary-500" href="{{.Permalink}}">{{ .Title | markdownify }}</a></h4>

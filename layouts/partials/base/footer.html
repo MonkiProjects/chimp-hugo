@@ -4,7 +4,8 @@
       <div class="lg:w-1/4 mb-6 lg:mb-0 lg:mr-6">
         <a href="{{site.BaseURL|relLangURL}}" class="mb-4 block">
           {{- if site.Params.logo }}
-          {{ partial "dynamic-img.html" (merge .Site.Params.logo.horizontal.colored (dict "classes" "h-16" "alt" (i18n "site_logo"))) }}
+            {{- $data := (merge .Site.Params.logo.horizontal.colored (dict "classes" "h-16" "alt" (i18n "site_logo"))) }}
+            {{ partialCached "dynamic-img.html" $data $data }}
           {{- else }}
           <span class="text-4xl font-bold">{{ site.Title }}</span>
           {{- end }}

@@ -4,7 +4,7 @@
     {{- range $index, $element := .items }}
     <li class="grid grid-cols-4 gap-x-8 gap-y-3">
       <div class="flex items-center justify-center md:order-{{mod $index 2}}">
-        {{- partial "image-frames/iphone.html" (dict "url" .image) }}
+        {{- partialCached "image-frames/iphone.html" (dict "url" .image) .image }}
       </div>
       <div class="col-span-4 sm:col-span-3 flex flex-col justify-center items-start {{if eq (mod $index 2) 0}}md:items-start md:text-left md:order-1{{else}}md:items-end md:text-right md:order-0{{end}}">
         <span class="text-3xl mb-4">{{ .title | markdownify }}</span>

@@ -13,7 +13,7 @@
     </div>
     <!-- Center -->
     <div class="col-start-2 col-span-4 sm:col-start-3 sm:col-span-2 md:col-span-2 order-1 md:order-2">
-      {{ partial "image-frames/iphone.html" (dict "url" .image) }}
+      {{ partialCached "image-frames/iphone.html" (dict "url" .image) .image }}
     </div>
     <!-- Right side -->
     <div class="col-span-6 sm:col-span-3 md:col-span-2 order-3">

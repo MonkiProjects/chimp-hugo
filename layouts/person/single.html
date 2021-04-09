@@ -12,7 +12,7 @@
         {{- partial "socials" . }}
       {{- end }}
       <div itemprop="worksFor" hidden>
-        {{- partial "seo/schemas/monki-projects.html" . }}
+        {{- partialCached "seo/schemas/monki-projects.html" . }}
       </div>
     </div>
   </div>
