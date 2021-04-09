@@ -24,7 +24,7 @@
     {{- range $index, $page := $posts }}
       {{- $large := (eq $index 0) }}
       {{- $no_author := true }}
-      {{ partialCached "blog/article-card.html" (dict "article" $page "large" $large "no_author" $no_author) $large $no_author }}
+      {{ partialCached "blog/article-card.html" (dict "article" $page "large" $large "no_author" $no_author) $page $large $no_author }}
     {{- end }}
   </div>
   {{- end }}
