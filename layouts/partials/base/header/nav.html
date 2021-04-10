@@ -1,0 +1,36 @@
+<nav class="flex-1 flex items-center justify-center sm:justify-start">
+  {{ "<!-- Brand -->" | safeHTML }}
+  <div class="flex-shrink-0 flex items-center">
+    <a href="{{site.BaseURL|relLangURL}}">
+      {{- $classes := (dict "classes" "h-9 sm:h-12" "alt" (i18n "site_logo")) }}
+      <!-- Logo on small sizes -->
+      <div class="block sm:hidden">
+        {{- $data := (merge .Site.Params.logo.horizontal.colored $classes) }}
+        {{ partialCached "dynamic-img.html" $data $data }}
+      </div>
+      <!-- Logo on medium sizes -->
+      <div class="hidden sm:block md:hidden">
+        {{- $data := (merge .Site.Params.logo.icon_only.colored $classes) }}
+        {{ partialCached "dynamic-img.html" $data $data }}
+      </div>
+      <!-- Logo on large sizes -->
+      <div class="hidden md:block">
+        {{- $data := (merge .Site.Params.logo.horizontal.colored $classes) }}
+        {{ partialCached "dynamic-img.html" $data $data }}
+      </div>
+    </a>
+  </div>
+  {{ "<!-- Navigation Links -->" | safeHTML }}
+  <ul class="hidden sm:flex sm:ml-6 space-x-4 text-lg">
+    <!--
+      Default: "text-gray-400 dark:text-gray-400"
+      Current: "font-bold text-gray-700 dark:text-gray-200"
+    -->
+    {{- range .Site.Menus.main }}
+      {{- $active := eq ($.GetPage .URL) $.FirstSection.Page }}
+    <li>
+      <a class="block px-3 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-black dark:hover:text-white {{if $active}}font-bold text-gray-700 dark:text-gray-200{{else}}text-gray-400 dark:text-gray-400{{end}} {{.Params.class}}" href="{{.URL|absLangURL}}">{{ .Pre }}{{ .Name }}{{ .Post }}</a>
+    </li>
+    {{- end }}
+  </ul>
+</nav>

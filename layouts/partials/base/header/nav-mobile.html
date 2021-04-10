@@ -1,0 +1,17 @@
+{{ "<!-- Mobile menu, show/hide based on menu state. -->" | safeHTML }}
+<!-- Hidden by default (might cause problems if JS is disabled) -->
+<nav class="hidden sm:hidden" id="main-nav-mobile">
+  {{ "<!-- Navigation Links -->" | safeHTML }}
+  <ul class="px-2 pt-2 pb-3 space-y-1">
+    <!--
+      Default: "text-gray-400 dark:text-gray-400"
+      Current: "font-bold text-gray-700 dark:text-gray-200"
+    -->
+    {{- range .Site.Menus.main }}
+      {{- $active := eq ($.GetPage .URL) $.FirstSection.Page }}
+    <li>
+      <a class="block px-3 py-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-black dark:hover:text-white {{if $active}}font-bold text-gray-700 dark:text-gray-200{{else}}text-gray-400 dark:text-gray-400{{end}} {{.Params.class}}" href="{{.URL|absLangURL}}">{{ .Pre }}{{ .Name }}{{ .Post }}</a>
+    </li>
+    {{- end }}
+  </ul>
+</nav>
