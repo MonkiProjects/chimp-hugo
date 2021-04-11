@@ -15,34 +15,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   {{- if .IsTranslated }}
-    {{ "<!-- Other Languages -->" | safeHTML }}
+  {{ "<!-- Other Languages -->" | safeHTML }}
     {{- range .Translations }}
   <link rel="alternate" hreflang="{{.Language.Lang}}" href="{{.Permalink}}" title="{{.Language.LanguageName}}">
     {{- end }}
   {{- end }}
 
-  {{ "<!-- Main Stylesheet -->" | safeHTML }}
-  <!-- See <https://gohugo.io/hugo-pipes/postprocess/#css-purging-with-postcss> -->
-  {{- $css := resources.Get "scss/style.scss" | toCSS }}
-  {{- $style := $css | postCSS }}
-  {{- if hugo.IsProduction }}
-    {{- $style := $style | minify | fingerprint | resources.PostProcess }}
-  <link rel="stylesheet" href="{{$style.Permalink}}" integrity="{{$style.Data.Integrity}}">
-  {{- else }}
-  <link rel="stylesheet" href="{{$style.RelPermalink}}">
-  {{- end }}
-
-  {{ "<!-- CSS Plugins -->" | safeHTML }}
-  {{- range site.Params.plugins.css }}
-  <link rel="stylesheet" href="{{.link|absURL}}">
-  {{- end }}
-
-  {{ "<!-- Favicon -->" | safeHTML }}
-  {{- with site.Params.favicon_html }}
-  {{ . | safeHTML }}
-  {{- else }}
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-  {{- end }}
+  {{ partialCached "base/head/css.html" . }}
+  {{ partialCached "base/head/favicon.html" . }}
 
   {{ "<!-- Hugo -->" | safeHTML }}
   {{ hugo.Generator }}

@@ -1,0 +1,6 @@
+{{ "<!-- Favicon -->" | safeHTML }}
+{{- with site.Params.favicon_html }}
+{{ . | safeHTML }}
+{{- else }}
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+{{- end }}
