@@ -1,6 +1,6 @@
 {{ "<!-- Main Stylesheet -->" | safeHTML }}
 <!-- See <https://gohugo.io/hugo-pipes/postprocess/#css-purging-with-postcss> -->
-{{- $css := resources.Get "scss/style.scss" | toCSS }}
+{{- $css := resources.Get "css/style.css" }}
 {{- $style := $css | postCSS }}
 {{- if hugo.IsProduction }}
   {{- $style := $style | minify | fingerprint | resources.PostProcess }}
