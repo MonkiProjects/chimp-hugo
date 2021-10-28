@@ -4,8 +4,10 @@
 {{- $style := $css | postCSS }}
 {{- if hugo.IsProduction }}
   {{- $style := $style | minify | fingerprint | resources.PostProcess }}
-{{- end }}
+<link rel="stylesheet" href="{{$style.Permalink}}">
+{{- else }}
 <link rel="stylesheet" href="{{$style.RelPermalink}}">
+{{- end }}
 
 {{ "<!-- CSS Plugins -->" | safeHTML }}
 {{- range site.Params.plugins.css }}
