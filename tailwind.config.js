@@ -1,4 +1,6 @@
 const colors = require('tailwindcss/colors');
+// Temporary fix coming from <https://github.com/tailwindlabs/tailwindcss/issues/4690#issuecomment-881266377>
+delete colors['lightBlue']
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
